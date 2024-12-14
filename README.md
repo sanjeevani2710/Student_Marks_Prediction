@@ -9,4 +9,8 @@
 ## Introduction
 This system aims to predict student's marks using linear regression. The idea behind this analysis is to predict the marks of students by their studying hours. <br/>
 
-## Results
+## Accuracy Score
+94.5%
+
+## Technologies Used
+HTML, CSS, Flask ,Pyton Libraries ad ML algorithm
