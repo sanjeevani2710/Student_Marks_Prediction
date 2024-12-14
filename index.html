@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marks Prediction</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+        }
+
+        /* Form container */
+        .form-container {
+            max-width: 400px;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 10px; /* Moves the headline a little bit down */
+        }
+
+        /* Labels and inputs */
+        label {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            display: block;
+            color: #555;
+        }
+
+        input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Styling for the result and error text */
+        .result {
+            font-size: 1.5rem;
+            color: #4CAF50;
+            margin-top: 20px;
+        }
+
+        .error {
+            font-size: 1rem;
+            color: #ff0000;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Student Marks Prediction</h1>
+        <form method="POST" action="{{ url_for('index') }}">
+            <label for="Study_Hours">Study Hours per Day:</label>
+            <input type="number" id="Study_Hours" name="Study_Hours" value="{{ study_hours | default('') }}" required>
+
+            <label for="Attendance">Attendance Percentage:</label>
+            <input type="number" id="Attendance" name="Attendance" value="{{ attendance | default('') }}" required>
+
+            <label for="Past_Marks">Past Marks:</label>
+            <input type="number" id="Past_Marks" name="Past_Marks" value="{{ past_marks | default('') }}" required>
+
+            <label for="Extracurricular">Extracurricular Activities:</label>
+            <select id="Extracurricular" name="Extracurricular" required>
+                <option value="1" {% if extracurricular == 1 %}selected{% endif %}>Yes</option>
+                <option value="0" {% if extracurricular == 0 %}selected{% endif %}>No</option>
+            </select>
+
+            <input type="submit" value="Predict">
+        </form>
+        <br>
+        {% if Prediction_text %}
+            <div class="result">{{ Prediction_text }}</div>
+        {% endif %}
+        {% if Error_text %}
+            <div class="error">{{ Error_text }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
